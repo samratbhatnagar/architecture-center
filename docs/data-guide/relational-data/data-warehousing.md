@@ -60,6 +60,7 @@ SMP:
 MPP:
 
 - [Azure Data Warehouse](/azure/sql-data-warehouse/sql-data-warehouse-overview-what-is)
+- [Azure Databricks with Delta Lake](https://docs.azuredatabricks.net/delta/index.html#id1)
 - [Apache Hive on HDInsight](/azure/hdinsight/hadoop/hdinsight-use-hive)
 - [Interactive Query (Hive LLAP) on HDInsight](/azure/hdinsight/interactive-query/apache-interactive-query-get-started)
 
@@ -67,7 +68,7 @@ As a general rule, SMP-based warehouses are best suited for small to medium data
 
 Beyond data sizes, the type of workload pattern is likely to be a greater determining factor. For example, complex queries may be too slow for an SMP solution, and require an MPP solution instead. MPP-based systems are likely to impose a performance penalty with small data sizes, due to the way jobs are distributed and consolidated across nodes. If your data sizes already exceed 1 TB and are expected to continually grow, consider selecting an MPP solution. However, if your data sizes are less than this, but your workloads are exceeding the available resources of your SMP solution, then MPP may be your best option as well.
 
-The data accessed or stored by your data warehouse could come from a number of data sources, including a data lake, such as [Azure Data Lake Store](/azure/data-lake-store/). For a video session that compares the different strengths of MPP services that can use Azure Data Lake, see [Azure Data Lake and Azure Data Warehouse: Applying Modern Practices to Your App](https://azure.microsoft.com/resources/videos/build-2016-azure-data-lake-and-azure-data-warehouse-applying-modern-practices-to-your-app/).
+The data accessed or stored by your data warehouse could come from a number of data sources, including a data lake, such as [Azure Data Lake Storage](/azure/data-lake-store/). For a video session that compares the different strengths of MPP services that can use Azure Data Lake, see [Azure Data Lake and Azure Data Warehouse: Applying Modern Practices to Your App](https://azure.microsoft.com/resources/videos/build-2016-azure-data-lake-and-azure-data-warehouse-applying-modern-practices-to-your-app/).
 
 SMP systems are characterized by a single instance of a relational database management system sharing all resources (CPU/Memory/Disk). You can scale up an SMP system. For SQL Server running on a VM, you can scale up the VM size. For Azure SQL Database, you can scale up by selecting a different service tier.
 
@@ -84,6 +85,8 @@ Azure SQL Data Warehouse can also be used for small and medium datasets, where t
 - [Migrating Data to Azure SQL Data Warehouse](https://blogs.msdn.microsoft.com/sqlcat/2016/08/18/migrating-data-to-azure-sql-data-warehouse-in-practice/)
 
 - [Common ISV Application Patterns Using Azure SQL Data Warehouse](https://blogs.msdn.microsoft.com/sqlcat/2017/09/05/common-isv-application-patterns-using-azure-sql-data-warehouse/)
+
+[Azure Databricks](/azure/azure-databricks/what-is-azure-databricks) with [Delta Lake](https://docs.azuredatabricks.net/delta/index.html#id1) offers an interesting hybrid solution by operating as both a data lake that can scale to store nearly limitless amounts of data, as well as a data warehouse that allows you to efficiently query against this data, even while simultaneously ingesting new data in real time. Azure Databricks provides a fully managed unified Apache Spark platform on which you can efficiently perform stream and batch processing workloads on petabytes of data. What Delta Lake adds is transactional insertions, deletions, upserts, and queries. Delta Lake performs optimizations on the files and automatically indexes, compacts, and caches the data. Because Azure Databricks uses either [Azure Blob storage](/azure/storage/blobs/storage-blobs-introduction) or [Azure Data Lake Storage](/azure/storage/blobs/data-lake-storage-introduction) under the covers, what you get is the scale and cost-efficiency of a data lake, coupled with the reliability and performance of a data warehouse.
 
 ## Key selection criteria
 
@@ -113,7 +116,11 @@ To narrow the choices, start by answering these questions:
 
   - SQL Data Warehouse has limits on concurrent queries and concurrent connections. For more information, see [Concurrency and workload management in SQL Data Warehouse](/azure/sql-data-warehouse/sql-data-warehouse-develop-concurrency). Consider using complementary services, such as [Azure Analysis Services](/azure/analysis-services/analysis-services-overview), to overcome limits in SQL Data Warehouse.
 
-- What sort of workload do you have? In general, MPP-based warehouse solutions are best suited for analytical, batch-oriented workloads. If your workloads are transactional by nature, with many small read/write operations or multiple row-by-row operations, consider using one of the SMP options. One exception to this guideline is when using stream processing on an HDInsight cluster, such as Spark Streaming, and storing the data within a Hive table.
+- What sort of workload do you have? In general, MPP-based warehouse solutions are best suited for analytical, batch-oriented workloads. If your workloads are transactional by nature, with many small read/write operations or multiple row-by-row operations, consider using one of the SMP options.
+
+  - An exception to this guideline is when using stream processing on an HDInsight or Azure Databricks cluster, such as Spark Structured Streaming, and storing the data within a Hive table.
+
+  - A more robust option when using both stream and batch processing is to use Delta Lake within Azure Databricks. You can also use Spark Structured Streaming, but when you store your data in Delta tables (an optimization of parquet-based Hive tables), you gain additional optimizations and capabilities for transactional workloads and simultaneous stream processing with high-performance reads against the entire data set.
 
 ## Capability Matrix
 
@@ -123,39 +130,45 @@ The following tables summarize the key differences in capabilities.
 
 <!-- markdownlint-disable MD033 -->
 
-| | Azure SQL Database | SQL Server (VM) | SQL Data Warehouse | Apache Hive on HDInsight | Hive LLAP on HDInsight |
-| --- | --- | --- | --- | --- | --- | -- |
-| Is managed service | Yes | No | Yes | Yes <sup>1</sup> | Yes <sup>1</sup> |
-| Requires data orchestration (holds copy of data/historical data) | No | No | Yes | Yes | Yes |
-| Easily integrate multiple data sources | No | No | Yes | Yes | Yes |
-| Supports pausing compute | No | No | Yes | No <sup>2</sup> | No <sup>2</sup> |
-| Relational data store | Yes | Yes |  Yes | No | No |
-| Real-time reporting | Yes | Yes | No | No | Yes |
-| Flexible backup restore points | Yes | Yes | No <sup>3</sup> | Yes <sup>4</sup> | Yes <sup>4</sup> |
-| SMP/MPP | SMP | SMP | MPP | MPP | MPP |
+|                                                                  | Azure SQL Database | SQL Server (VM) | SQL Data Warehouse | Azure Databricks Delta Lake | Apache Hive on HDInsight | Hive LLAP on HDInsight |
+| ---------------------------------------------------------------- | ------------------ | --------------- | ------------------ | --------------------------- | ------------------------ | ---------------------- |
+| Is managed service                                               | Yes                | No              | Yes                | Yes                         | Yes <sup>1</sup>         | Yes <sup>1</sup>       |
+| Requires data orchestration (holds copy of data/historical data) | No                 | No              | Yes                | No <sup>2</sup>             | Yes                      | Yes                    |
+| Easily integrate multiple data sources                           | No                 | No              | Yes                | Yes                         | Yes                      | Yes                    |
+| Supports pausing compute                                         | No                 | No              | Yes                | Yes <sup>3</sup>            | No <sup>4</sup>          | No <sup>4</sup>        |
+| Relational data store                                            | Yes                | Yes             | Yes                | No                          | No                       | No                     |
+| Real-time reporting                                              | Yes                | Yes             | No                 | Yes                         | No                       | Yes                    |
+| Flexible backup restore points                                   | Yes                | Yes             | No <sup>5</sup>    | Yes                         | Yes <sup>6</sup>         | Yes <sup>6</sup>       |
+| SMP/MPP                                                          | SMP                | SMP             | MPP                | MPP                         | MPP                      | MPP                    |
 
 <!-- markdownlint-enable MD033 -->
 
 [1] Manual configuration and scaling.
 
-[2] HDInsight clusters can be deleted when not needed, and then re-created. Attach an external data store to your cluster so your data is retained when you delete your cluster. You can use Azure Data Factory to automate your cluster's lifecycle by creating an on-demand HDInsight cluster to process your workload, then delete it once the processing is complete.
+[2] Azure Databricks Delta Lake can act as both your data lake and your data warehouse, requiring no orchestration. However, if you are storing data from data sources that do not have a Spark connector, or if you require batch loading from various data sources, then you will want to use a orchestrator, such as Azure Data Factory.
 
-[3] With SQL Data Warehouse, you can restore a database to any available restore point within the last seven days. Snapshots start every four to eight hours and are available for seven days. When a snapshot is older than seven days, it expires and its restore point is no longer available.
+[3] Azure Databricks clusters can be stopped (terminated) when not used in order to save costs. You can either use Databricks jobs to schedule spinning up and down clusters to run notebooks or libraries, or use Azure Data Factory to automate your cluster's lifecycle by executing a Databricks notebook activity. Clusters can be configured to automatically terminate after a specified period of inactivity.
 
-[4] Consider using an [external Hive metastore](/azure/hdinsight/hdinsight-hadoop-provision-linux-clusters#use-hiveoozie-metastore) that can be backed up and restored as needed. Standard backup and restore options that apply to Blob Storage or Data Lake Store can be used for the data, or third-party HDInsight backup and restore solutions, such as [Imanis Data](https://azure.microsoft.com/blog/imanis-data-cloud-migration-backup-for-your-big-data-applications-on-azure-hdinsight/) can be used for greater flexibility and ease of use.
+[4] HDInsight clusters can be deleted when not needed, and then re-created. Attach an external data store to your cluster so your data is retained when you delete your cluster. You can use Azure Data Factory to automate your cluster's lifecycle by creating an on-demand HDInsight cluster to process your workload, then delete it once the processing is complete.
+
+[5] With SQL Data Warehouse, you can restore a database to any available restore point within the last seven days. Snapshots start every four to eight hours and are available for seven days. When a snapshot is older than seven days, it expires and its restore point is no longer available.
+
+[6] Consider using an [external Hive metastore](/azure/hdinsight/hdinsight-hadoop-provision-linux-clusters#use-hiveoozie-metastore) that can be backed up and restored as needed. Standard backup and restore options that apply to Blob Storage or Data Lake Storage can be used for the data, or third-party HDInsight backup and restore solutions, such as [Imanis Data](https://azure.microsoft.com/blog/imanis-data-cloud-migration-backup-for-your-big-data-applications-on-azure-hdinsight/) can be used for greater flexibility and ease of use.
 
 ### Scalability capabilities
 
 <!-- markdownlint-disable MD033 -->
 
-| | Azure SQL Database | SQL Server (VM) |  SQL Data Warehouse | Apache Hive on HDInsight | Hive LLAP on HDInsight |
-| --- | --- | --- | --- | --- | --- | -- |
-| Redundant regional servers for high availability  | Yes | Yes | Yes | No | No |
-| Supports query scale out (distributed queries)  | No | No | Yes | Yes | Yes |
-| Dynamic scalability | Yes | No | Yes <sup>1</sup> | No | No |
-| Supports in-memory caching of data | Yes |  Yes | No | Yes | Yes |
+|                                                  | Azure SQL Database | SQL Server (VM) | SQL Data Warehouse | Azure Databricks Delta Lake | Apache Hive on HDInsight | Hive LLAP on HDInsight |
+| ------------------------------------------------ | ------------------ | --------------- | ------------------ | --------------------------- | ------------------------ | ---------------------- |
+| Redundant regional servers for high availability | Yes                | Yes             | Yes                | No                          | No                       | No                     |
+| Supports query scale out (distributed queries)   | No                 | No              | Yes                | Yes                         | Yes                      | Yes                    |
+| Dynamic scalability                              | Yes                | No              | Yes <sup>1</sup>   | Yes <sup>2</sup>            | No                       | No                     |
+| Supports in-memory caching of data               | Yes                | Yes             | No                 | Yes                         | Yes                      | Yes                    |
 
 [1] SQL Data Warehouse allows you to scale up or down by adjusting the number of data warehouse units (DWUs). See [Manage compute power in Azure SQL Data Warehouse](/azure/sql-data-warehouse/sql-data-warehouse-manage-compute-overview).
+
+[2] Azure Databricks clusters can be [configured to automatically scale out to a specified number of nodes](https://docs.azuredatabricks.net/user-guide/clusters/sizing.html), based on demand. You can also scale up a cluster's worker or driver nodes to larger VMs as needed.
 
 <!-- markdownlint-enable MD033 -->
 
@@ -163,15 +176,15 @@ The following tables summarize the key differences in capabilities.
 
 <!-- markdownlint-disable MD033 -->
 
-|                         |           Azure SQL Database            |  SQL Server in a virtual machine  | SQL Data Warehouse |   Apache Hive on HDInsight    |    Hive LLAP on HDInsight     |
-|-------------------------|-----------------------------------------|-----------------------------------|--------------------|-------------------------------|-------------------------------|
-|     Authentication      | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD / Active Directory |   SQL / Azure AD   | local / Azure AD <sup>1</sup> | local / Azure AD <sup>1</sup> |
-|      Authorization      |                   Yes                   |                Yes                |        Yes         |              Yes              |       Yes <sup>1</sup>        |
-|        Auditing         |                   Yes                   |                Yes                |        Yes         |              Yes              |       Yes <sup>1</sup>        |
-| Data encryption at rest |            Yes <sup>2</sup>             |         Yes <sup>2</sup>          |  Yes <sup>2</sup>  |       Yes <sup>2</sup>        |       Yes <sup>1</sup>        |
-|   Row-level security    |                   Yes                   |                Yes                |        Yes         |              No               |       Yes <sup>1</sup>        |
-|   Supports firewalls    |                   Yes                   |                Yes                |        Yes         |              Yes              |       Yes <sup>3</sup>        |
-|  Dynamic data masking   |                   Yes                   |                Yes                |        Yes         |              No               |       Yes <sup>1</sup>        |
+|                         | Azure SQL Database                      | SQL Server in a virtual machine   | SQL Data Warehouse | Azure Databricks Delta Lake | Apache Hive on HDInsight      | Hive LLAP on HDInsight        |
+| ----------------------- | --------------------------------------- | --------------------------------- | ------------------ | --------------------------- | ----------------------------- | ----------------------------- |
+| Authentication          | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD / Active Directory | SQL / Azure AD     | Azure AD                    | local / Azure AD <sup>1</sup> | local / Azure AD <sup>1</sup> |
+| Authorization           | Yes                                     | Yes                               | Yes                | Yes                         | Yes                           | Yes <sup>1</sup>              |
+| Auditing                | Yes                                     | Yes                               | Yes                | Yes                         | Yes                           | Yes <sup>1</sup>              |
+| Data encryption at rest | Yes <sup>2</sup>                        | Yes <sup>2</sup>                  | Yes <sup>2</sup>   | Yes                         | Yes <sup>2</sup>              | Yes <sup>1</sup>              |
+| Row-level security      | Yes                                     | Yes                               | Yes                | Yes <sup>3</sup>            | No                            | Yes <sup>1</sup>              |
+| Supports firewalls      | Yes                                     | Yes                               | Yes                | Yes                         | Yes <sup>4</sup>              | Yes <sup>4</sup>              |
+| Dynamic data masking    | Yes                                     | Yes                               | Yes                | No                          | No                            | Yes <sup>1</sup>              |
 
 <!-- markdownlint-enable MD033 -->
 
@@ -179,7 +192,9 @@ The following tables summarize the key differences in capabilities.
 
 [2] Requires using Transparent Data Encryption (TDE) to encrypt and decrypt your data at rest.
 
-[3] Supported when [used within an Azure Virtual Network](/azure/hdinsight/hdinsight-extend-hadoop-virtual-network).
+[3] You can achieve row-level security if you use Azure Data Lake Storage with Azure Databricks with high concurrency clusters (Python or SQL support only). You need to [enable credential passthrough](https://docs.azuredatabricks.net/spark/latest/data-sources/azure/adls-passthrough.html#adls-aad-credentials) on your cluster and have properly configured Azure Active Directory tokens for your account such that any Azure Databricks users who read and write from Azure Data Lake Storage have proper permissions on the data they need access to. The key to achieving row-level security with this configuration is to store the underlying data into file paths within Azure Data Lake Storage that have ACLs applied to specify which users or groups have access to the data.
+
+[4] Supported when [used within an Azure Virtual Network](/azure/hdinsight/hdinsight-extend-hadoop-virtual-network).
 
 Read more about securing your data warehouse:
 
