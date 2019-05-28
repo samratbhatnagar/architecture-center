@@ -1,6 +1,6 @@
 ---
 title: Data lakes
-description: 
+description:
 author: zoinerTejada
 ms.date: 02/12/2018
 ms.topic: guide
@@ -41,5 +41,6 @@ Data lake stores are often used in event streaming or IoT scenarios, because the
 
 ## Relevant Azure services
 
-- [Data Lake Store](/azure/data-lake-store/) is a hyper-scale, Hadoop-compatible repository.
+- [Data Lake Storage](/azure/storage/blobs/data-lake-storage-introduction) is a hyper-scale, Hadoop-compatible repository.
 - [Data Lake Analytics](/azure/data-lake-analytics/) is an on-demand analytics job service to simplify big data analytics.
+- Azure Databricks [Delta Lake](https://docs.azuredatabricks.net/delta/index.html#id1) acts as both a data lake and data warehouse, supporting high-volume data ingest with simultaneous reads against its optimized data store.
