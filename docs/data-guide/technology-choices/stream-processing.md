@@ -49,16 +49,18 @@ The following tables summarize the key differences in capabilities.
 
 | | Azure Stream Analytics | HDInsight with Spark Streaming | Apache Spark in Azure Databricks | HDInsight with Storm | Azure Functions | Azure App Service WebJobs |
 | --- | --- | --- | --- | --- | --- | --- |
-| Programmability | Stream analytics query language, JavaScript | Scala, Python, Java | Scala, Python, Java, R | Java, C# | C#, F#, Node.js | C#, Node.js, PHP, Java, Python |
+| Programmability | Stream analytics query language, JavaScript | Scala, Python, Java, R, C# / F# <sup>1</sup> | Scala, Python, Java, R, C# / F# <sup>1</sup> | Java, C# | C#, F#, Node.js | C#, Node.js, PHP, Java, Python |
 | Programming paradigm | Declarative | Mixture of declarative and imperative | Mixture of declarative and imperative | Imperative | Imperative | Imperative |
-| Pricing model | [Streaming units](https://azure.microsoft.com/pricing/details/stream-analytics/) | Per cluster hour | [Databricks units](https://azure.microsoft.com/pricing/details/databricks/) | Per cluster hour | Per function execution and resource consumption | Per app service plan hour |  
+| Pricing model | [Streaming units](https://azure.microsoft.com/pricing/details/stream-analytics/) | Per cluster hour | DBU (Databricks Unit) processing capability + VM cost per hour, billed on per-second usage (see [pricing details](https://azure.microsoft.com/pricing/details/databricks/)) | Per cluster hour | Per function execution and resource consumption | Per app service plan hour |
+
+[1] Use the open source [.NET for Apache Spark](https://github.com/dotnet/spark) APIs to use Apache Spark from C# and F#.
 
 ### Integration capabilities
 
 | | Azure Stream Analytics | HDInsight with Spark Streaming | Apache Spark in Azure Databricks | HDInsight with Storm | Azure Functions | Azure App Service WebJobs |
 | --- | --- | --- | --- | --- | --- | --- |
-| Inputs | Azure Event Hubs, Azure IoT Hub, Azure Blob storage  | Event Hubs, IoT Hub, Kafka, HDFS, Storage Blobs, Azure Data Lake Store  | Event Hubs, IoT Hub, Kafka, HDFS, Storage Blobs, Azure Data Lake Store  | Event Hubs, IoT Hub, Storage Blobs, Azure Data Lake Store  | [Supported bindings](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Service Bus, Storage Queues, Storage Blobs, Event Hubs, WebHooks, Cosmos DB, Files |
-| Sinks |  Azure Data Lake Store, Azure SQL Database, Storage Blobs, Event Hubs, Power BI, Table Storage, Service Bus Queues, Service Bus Topics, Cosmos DB, Azure Functions  | HDFS, Kafka, Storage Blobs, Azure Data Lake Store, Cosmos DB | HDFS, Kafka, Storage Blobs, Azure Data Lake Store, Cosmos DB | Event Hubs, Service Bus, Kafka | [Supported bindings](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Service Bus, Storage Queues, Storage Blobs, Event Hubs, WebHooks, Cosmos DB, Files |
+| Inputs | Azure Event Hubs, Azure IoT Hub, Azure Blob storage  | Event Hubs, IoT Hub, Kafka, HDFS, Storage Blobs, Azure Data Lake Storage  | Event Hubs, IoT Hub, Kafka, HDFS, Storage Blobs, Azure Data Lake Storage  | Event Hubs, IoT Hub, Storage Blobs, Azure Data Lake Storage  | [Supported bindings](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Service Bus, Storage Queues, Storage Blobs, Event Hubs, WebHooks, Cosmos DB, Files |
+| Sinks |  Azure Data Lake Storage, Azure SQL Database, Storage Blobs, Event Hubs, Power BI, Table Storage, Service Bus Queues, Service Bus Topics, Cosmos DB, Azure Functions  | HDFS, Kafka, Storage Blobs, Azure Data Lake Storage, Cosmos DB | HDFS, Kafka, Storage Blobs, Azure Data Lake Storage, Cosmos DB | Event Hubs, Service Bus, Kafka | [Supported bindings](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Service Bus, Storage Queues, Storage Blobs, Event Hubs, WebHooks, Cosmos DB, Files |
 
 ### Processing capabilities
 

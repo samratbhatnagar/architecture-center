@@ -1,6 +1,6 @@
 ---
 title: Choosing a batch processing technology
-description: 
+description:
 author: zoinerTejada
 ms.date: 11/03/2018
 ms.topic: guide
@@ -79,29 +79,29 @@ The following tables summarize the key differences in capabilities.
 
 <!-- markdownlint-disable MD033 -->
 
-| | Azure Data Lake Analytics | Azure SQL Data Warehouse | HDInsight | Azure Databricks |
-| --- | --- | --- | --- | --- | --- |
-| Is managed service | Yes | Yes | Yes <sup>1</sup> | Yes |
-| Relational data store | Yes | Yes | No | No |
-| Pricing model | Per batch job | By cluster hour | By cluster hour | Databricks Unit<sup>2</sup> + cluster hour |
+|                       | Azure Data Lake Analytics | Azure SQL Data Warehouse | HDInsight        | Azure Databricks                           |
+| --------------------- | ------------------------- | ------------------------ | ---------------- | ------------------------------------------ |
+| Is managed service    | Yes                       | Yes                      | Yes <sup>1</sup> | Yes                                        |
+| Relational data store | Yes                       | Yes                      | No               | No                                         |
+| Pricing model         | Per batch job             | By cluster hour          | By cluster hour  | Databricks Unit<sup>2</sup> + cluster hour |
 
 [1] With manual configuration and scaling.
 
-[2] A Databricks Unit (DBU) is a unit of processing capability per hour.
+[2] DBU (Databricks Unit) processing capability + VM cost per hour, billed on per-second usage (see [pricing details](https://azure.microsoft.com/pricing/details/databricks/)).
 
 ### Capabilities
 
-| | Azure Data Lake Analytics | SQL Data Warehouse | HDInsight with Spark | HDInsight with Hive | HDInsight with Hive LLAP | Azure Databricks |
-| --- | --- | --- | --- | --- | --- | --- |
-| Autoscaling | No | No | No | No | No | Yes |
-| Scale-out granularity  | Per job | Per cluster | Per cluster | Per cluster | Per cluster | Per cluster |
-| In-memory caching of data | No | Yes | Yes | No | Yes | Yes |
-| Query from external relational stores | Yes | No | Yes | No | No | Yes |
-| Authentication  | Azure AD | SQL / Azure AD | No | Azure AD<sup>1</sup> | Azure AD<sup>1</sup> | Azure AD |
-| Auditing  | Yes | Yes | No | Yes <sup>1</sup> | Yes <sup>1</sup> | Yes |
-| Row-level security | No | No | No | Yes <sup>1</sup> | Yes <sup>1</sup> | No |
-| Supports firewalls | Yes | Yes | Yes | Yes <sup>2</sup> | Yes <sup>2</sup> | No |
-| Dynamic data masking | No | No | No | Yes <sup>1</sup> | Yes <sup>1</sup> | No |
+|                                       | Azure Data Lake Analytics | SQL Data Warehouse | HDInsight with Spark | HDInsight with Hive  | HDInsight with Hive LLAP | Azure Databricks |
+| ------------------------------------- | ------------------------- | ------------------ | -------------------- | -------------------- | ------------------------ | ---------------- |
+| Autoscaling                           | No                        | No                 | No                   | No                   | No                       | Yes              |
+| Scale-out granularity                 | Per job                   | Per cluster        | Per cluster          | Per cluster          | Per cluster              | Per cluster      |
+| In-memory caching of data             | No                        | Yes                | Yes                  | No                   | Yes                      | Yes              |
+| Query from external relational stores | Yes                       | No                 | Yes                  | No                   | No                       | Yes              |
+| Authentication                        | Azure AD                  | SQL / Azure AD     | No                   | Azure AD<sup>1</sup> | Azure AD<sup>1</sup>     | Azure AD         |
+| Auditing                              | Yes                       | Yes                | No                   | Yes <sup>1</sup>     | Yes <sup>1</sup>         | Yes              |
+| Row-level security                    | No                        | No                 | No                   | Yes <sup>1</sup>     | Yes <sup>1</sup>         | No               |
+| Supports firewalls                    | Yes                       | Yes                | Yes                  | Yes <sup>2</sup>     | Yes <sup>2</sup>         | No               |
+| Dynamic data masking                  | No                        | No                 | No                   | Yes <sup>1</sup>     | Yes <sup>1</sup>         | No               |
 
 <!-- markdownlint-enable MD033 -->
 
