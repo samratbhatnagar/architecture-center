@@ -1,6 +1,6 @@
 ---
 title: Interactive data exploration
-description: 
+description:
 author: zoinerTejada
 ms.date: 02/12/2018
 ms.topic: guide
@@ -10,7 +10,7 @@ ms.subservice: cloud-fundamentals
 
 # Interactive data exploration
 
-In many corporate business intelligence (BI) solutions, reports and semantic models are created by BI specialists and managed centrally. Increasingly, however, organizations want to enable users to make data-driven decisions. Additionally, a growing number of organizations are hiring *data scientists* or *data analysts*, whose job is to explore data interactively and apply statistical models and analytical techniques to find trends and patterns in the data. Interactive data exploration requires tools and platforms that provide low-latency processing for ad-hoc queries and data visualizations.
+In many corporate business intelligence (BI) solutions, reports and semantic models are created by BI specialists and managed centrally. Increasingly, however, organizations want to enable users to make data-driven decisions. Additionally, a growing number of organizations are hiring _data scientists_ or _data analysts_, whose job is to explore data interactively and apply statistical models and analytical techniques to find trends and patterns in the data. Interactive data exploration requires tools and platforms that provide low-latency processing for ad-hoc queries and data visualizations.
 
 ![Interactive data exploration](./images/data-exploration.png)
 
@@ -31,13 +31,14 @@ Relevant Azure services:
 
 ## Data science experimentation
 
-When an organization requires advanced analytics and predictive modeling, the initial preparation work is usually undertaken by specialist data scientists. A data scientist explores the data and applies statistical analytical techniques to find relationships between data *features* and the desired predicted *labels*. Data exploration is typically done using programming languages such as Python or R that natively support statistical modeling and visualization. The scripts used to explore the data are typically hosted in specialized environments such as Jupyter Notebooks. These tools enable data scientists to explore the data programmatically while documenting and sharing the insights they find.
+When an organization requires advanced analytics and predictive modeling, the initial preparation work is usually undertaken by specialist data scientists. A data scientist explores the data and applies statistical analytical techniques to find relationships between data _features_ and the desired predicted _labels_. Data exploration is typically done using programming languages such as Python or R that natively support statistical modeling and visualization. The scripts used to explore the data are typically hosted in specialized environments such as Jupyter Notebooks. These tools enable data scientists to explore the data programmatically while documenting and sharing the insights they find.
 
 Relevant Azure services:
 
 - [Azure Notebooks](https://notebooks.azure.com/)
+- [Azure Machine Learning Service](/azure/machine-learning/service/overview-what-is-azure-ml)
 - [Azure Machine Learning Studio](/azure/machine-learning/studio/what-is-ml-studio)
-- [Azure Machine Learning Experimentation Services](/azure/machine-learning/preview/experimentation-service-configuration)
+- [Azure Databricks](/azure/azure-databricks/what-is-azure-databricks)
 - [The Data Science Virtual Machine](/azure/machine-learning/data-science-virtual-machine/overview)
 
 ## Challenges
@@ -83,7 +84,7 @@ For more information, see [Analytical data stores](../technology-choices/analyti
 
 - **Jupyter**. Jupyter Notebooks provides a browser-based interface for running code in languages such as R, Python, or Scala. When using R Server or Spark to batch process data, or when using Spark SQL to define a schema of tables for querying, Jupyter can be a good choice for querying the data. When using Spark, you can use the standard Spark dataframe API or the Spark SQL API as well as embedded SQL statements to query the data and produce visualizations.
 
-- **Drill**. If you want to perform ad hoc data exploration, [Apache Drill](https://drill.apache.org/) is a schema-free SQL query engine. Because it doesn't require a schema, you can query data from a variety of data sources, and the engine will automatically understand the structure of the data.  You can use Drill with Azure Blob Storage, by using the [Azure Blob Storage Plugin](https://drill.apache.org/docs/azure-blob-storage-plugin/). This lets you run queries against data in Blob Storage without having to move the data.
+- **Drill**. If you want to perform ad hoc data exploration, [Apache Drill](https://drill.apache.org/) is a schema-free SQL query engine. Because it doesn't require a schema, you can query data from a variety of data sources, and the engine will automatically understand the structure of the data. You can use Drill with Azure Blob Storage, by using the [Azure Blob Storage Plugin](https://drill.apache.org/docs/azure-blob-storage-plugin/). This lets you run queries against data in Blob Storage without having to move the data.
 
 - **Interactive Hive Clients**. If you use an Interactive Hive cluster to query the data, you can use the Hive view in the Ambari cluster dashboard, the Beeline command line tool, or any ODBC-based tool (using the Hive ODBC driver), such as Microsoft Excel or Power BI.
 

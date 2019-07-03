@@ -1,6 +1,6 @@
 ---
 title: Machine learning at scale
-description: 
+description:
 author: zoinerTejada
 ms.date: 02/12/2018
 ms.topic: guide
@@ -14,7 +14,7 @@ Machine learning (ML) is a technique used to train predictive models based on ma
 
 Creating and deploying a machine learning model is an iterative process:
 
-- Data scientists explore the source data to determine relationships between *features* and predicted *labels*.
+- Data scientists explore the source data to determine relationships between _features_ and predicted _labels_.
 - The data scientists train and validate models based on appropriate algorithms to find the optimal model for prediction.
 - The optimal model is deployed into production, as a web service or some other encapsulated function.
 - As new data is collected, the model is periodically retrained to improve its effectiveness.
@@ -57,7 +57,7 @@ Before deciding which ML services to use in training and operationalization, con
 - Use the pretrained neural network models provided by the Cognitive Toolkit.
 - Embed the serialized models provided by Core ML for an iOS app.
 
-If a prebuilt model does not fit your data or your scenario, options in Azure include Azure Machine Learning, HDInsight with Spark MLlib and MMLSpark, Azure Databricks, Cognitive Toolkit, and SQL Machine Learning Services. If you decide to use a custom model, you must design a pipeline that includes model training and operationalization.
+If a prebuilt model does not fit your data or your scenario, options in Azure include Azure Machine Learning, Azure Databricks with Spark MLlib and MMLSpark, Cognitive Toolkit, and SQL Machine Learning Services. If you decide to use a custom model, you must design a pipeline that includes model training and operationalization.
 
 ![Model options in Azure](./images/machine-learning-model-training-and-deployment.png)
 
