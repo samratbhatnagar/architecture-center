@@ -51,7 +51,8 @@ There are two broad categories of machine learning:
 
 Relevant Azure services:
 
-- [Azure Machine Learning](/azure/machine-learning/)
+- [Azure Machine Learning service](/azure/machine-learning/service)
+- [Azure Databricks](https://docs.azuredatabricks.net/spark/latest/mllib/index.html)
 - [Machine Learning Server (R Server) on HDInsight](/azure/hdinsight/r-server/r-server-overview)
 
 ## Deep learning
@@ -62,12 +63,14 @@ When designing a cloud architecture for advanced analytics, you should consider 
 
 Relevant Azure services:
 
+- [Azure Machine Learning service](/azure/machine-learning/service)
+- [Azure Databricks](https://docs.azuredatabricks.net/spark/latest/mllib/index.html)
 - [Deep Learning Virtual Machine](/azure/machine-learning/data-science-virtual-machine/deep-learning-dsvm-overview)
 - [Apache Spark on HDInsight](/azure/hdinsight/spark/apache-spark-overview)
 
 ## Artificial intelligence
 
-Artificial intelligence (AI) refers to scenarios where a machine mimics the cognitive functions associated with human minds, such as learning and problem solving. Because AI leverages machine learning algorithms, it is viewed as an umbrella term. Most AI solutions rely on a combination of predictive services, often implemented as web services, and natural language interfaces, such as chatbots that interact via text or speech, that are presented by AI apps running on mobile devices or other clients. In some cases, the machine learning model is embedded with the AI app.
+Artificial intelligence (AI) refers to scenarios where a machine mimics the cognitive functions associated with human minds, such as learning and problem solving. Because AI leverages machine learning and deep learning algorithms, it is viewed as an umbrella term. Most AI solutions rely on a combination of predictive services, often implemented as web services, and natural language interfaces, such as chatbots that interact via text or speech, that are presented by AI apps running on mobile devices or other clients. In some cases, the machine learning model is embedded with the AI app.
 
 ## Model deployment
 
@@ -75,8 +78,7 @@ The predictive services that support AI applications may leverage custom machine
 
 Relevant Azure services:
 
-- [Azure Machine Learning](/azure/machine-learning/)
-
+- [Azure Machine Learning service](/azure/machine-learning/service)
 - [Machine Learning Server (R Server) on HDInsight](/azure/hdinsight/r-server/r-server-overview)
 
 ## See also

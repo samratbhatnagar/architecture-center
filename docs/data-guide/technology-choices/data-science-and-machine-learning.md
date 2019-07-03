@@ -68,22 +68,22 @@ Try the [free or paid version of Azure Machine Learning service](https://aka.ms/
 |**Key benefits**           |Central management of scripts and run history, making it easy to compare model versions.<br/><br/>Easy deployment and management of models to the cloud or edge devices.|
 |**Considerations**         |Requires some familiarity with the model management model.|
 
-## Azure Machine Learning Studio
+## Azure Machine Learning visual interface
 
-[Azure Machine Learning Studio](/azure/machine-learning/studio/) gives you an interactive, visual workspace that you can use to easily and quickly build, test, and deploy models using pre-built machine learning algorithms. Machine Learning Studio publishes models as web services that can easily be consumed by custom apps or BI tools such as Excel.
+[Azure Machine Learning visual interface](/azure/machine-learning/service/ui-quickstart-run-experiment) gives you an interactive, visual workspace that you can use to easily and quickly build, test, and deploy models choosing from a suite of machine learning algorithms. Machine Learning Studio publishes models as web services that can easily be consumed by custom apps or BI tools such as Excel.
 No programming is required - you construct your machine learning model by connecting datasets and analysis modules on an interactive canvas, and then deploy it with a couple clicks.
 
-Use Machine Learning Studio when you want to develop and deploy models with no code required.
+Use the Azure Machine Learning visual interface when you want to develop and deploy models with no code required.
 
-Try [Azure Machine Learning Studio](https://studio.azureml.net/?selectAccess=true&o=2&target=_blank), available in paid or free options.
+Try the [free or paid version of Azure Machine Learning service](https://aka.ms/AMLFree).
 
 |||
 |-|-|
 |**Type**                   |Cloud-based, drag-and-drop machine learning solution|
-|**Supported languages**    |Python, R|
+|**Supported languages**    |Python|
 |**Machine learning phases**|Data preparation<br>Model training<br>Deployment<br>Management|
-|**Key benefits**           |Interactive visual interface enables machine learning modeling with minimal code.<br/><br/>Built-in Jupyter Notebooks for data exploration.<br/><br/>Direct deployment of trained models as Azure web services.|
-|**Considerations**         |Limited scalability. The maximum size of a training dataset is 10 GB.<br/><br/>Online only. No offline development environment.|
+|**Key benefits**           |Interactive visual interface enables machine learning modeling with minimal code.<br/><br/>Direct deployment of trained models as Azure hosted web services.|
+|**Considerations**         |Online only. No offline development environment.|
 
 ## Azure Cognitive Services
 

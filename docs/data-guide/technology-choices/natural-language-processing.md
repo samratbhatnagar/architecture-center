@@ -20,8 +20,9 @@ Free-form text processing is performed against documents containing paragraphs o
 
 In Azure, the following services provide natural language processing (NLP) capabilities:
 
-- [Azure HDInsight with Spark and Spark MLlib](/azure/hdinsight/spark/apache-spark-overview)
+- [Azure Machine Learning service](/azure/machine-learning/service)
 - [Azure Databricks](/azure/azure-databricks/what-is-azure-databricks)
+- [Azure HDInsight](/azure/hdinsight/spark/apache-spark-overview)
 - [Microsoft Cognitive Services](/azure/cognitive-services/welcome)
 
 ## Key selection criteria
@@ -30,9 +31,9 @@ To narrow the choices, start by answering these questions:
 
 - Do you want to use prebuilt models? If yes, consider using the APIs offered by Microsoft Cognitive Services.
 
-- Do you need to train custom models against a large corpus of text data? If yes, consider using Azure HDInsight with Spark MLlib and Spark NLP.
+- Do you need to train custom models against a large corpus of text data? If yes, consider using Azure Databricks or the Azure Machine Learning service.
 
-- Do you need low-level NLP capabilities like tokenization, stemming, lemmatization, and term frequency/inverse document frequency (TF/IDF)? If yes, consider using Azure HDInsight with Spark MLlib and Spark NLP.
+- Do you need low-level NLP capabilities like tokenization, stemming, lemmatization, and term frequency/inverse document frequency (TF/IDF)? If yes, consider using Azure Databricks or Azure Machine Learning service.
 
 - Do you need simple, high-level NLP capabilities like entity and intent identification, topic detection, spell check, or sentiment analysis? If yes, consider using the APIs offered by Microsoft Cognitive Services.
 
@@ -42,36 +43,36 @@ The following tables summarize the key differences in capabilities.
 
 ### General capabilities
 
-|                                                         | Azure HDInsight / Azure Databricks | Microsoft Cognitive Services         |
-| ------------------------------------------------------- | ---------------------------------- | ------------------------------------ |
-| Provides pretrained models as a service                 | No                                 | Yes                                  |
-| REST API                                                | Yes                                | Yes                                  |
-| Programmability                                         | Python, Scala, Java                | C#, Java, Node.js, Python, PHP, Ruby |
-| Support processing of big data sets and large documents | Yes                                | No                                   |
+|                                                         |  Azure Databricks / Azure HDInsight  |  Azure Machine Learning service  | Microsoft Cognitive Services         |
+| ------------------------------------------------------- | ---------------------------------- | ---------------------------------- | ------------------------------------ |
+| Provides pretrained models as a service                 | No                                 | No                                 | Yes                                  |
+| REST API                                                | Yes                                | Yes                                | Yes                                  |
+| Programmability                                         | Python, Scala, Java, R             | Python, Scala, Java, R             | C#, Java, Node.js, Python, PHP, Ruby |
+| Support processing of big data sets and large documents | Yes                                | Yes                                | No                                   |
 
 ### Low-level natural language processing capabilities
 
-|                                                    | Azure HDInsight / Azure Databricks | Microsoft Cognitive Services  |
-| -------------------------------------------------- | ---------------------------------- | ----------------------------- |
-| Tokenizer                                          | Yes (Spark NLP)                    | Yes (Linguistic Analysis API) |
-| Stemmer                                            | Yes (Spark NLP)                    | No                            |
-| Lemmatizer                                         | Yes (Spark NLP)                    | No                            |
-| Part of speech tagging                             | Yes (Spark NLP)                    | Yes (Linguistic Analysis API) |
-| Term frequency/inverse-document frequency (TF/IDF) | Yes (Spark MLlib)                  | No                            |
-| String similarity&mdash;edit distance calculation  | Yes (Spark MLlib)                  | No                            |
-| N-gram calculation                                 | Yes (Spark MLlib)                  | No                            |
-| Stop word removal                                  | Yes (Spark MLlib)                  | No                            |
+|                                                    | Azure Databricks / Azure HDInsight | Azure Machine Learning service | Microsoft Cognitive Services  |
+| -------------------------------------------------- | ---------------------------------- | ---------------------------------- | ----------------------------- |
+| Tokenizer                                          | Yes                     | Yes                     | Yes (Linguistic Analysis API) |
+| Stemmer                                            | Yes                     | Yes                     | No                            |
+| Lemmatizer                                         | Yes                     | Yes                     | No                            |
+| Part of speech tagging                             | Yes                     | Yes                     | Yes (Linguistic Analysis API) |
+| Term frequency/inverse-document frequency (TF/IDF) | Yes                     | Yes                     | No                            |
+| String similarity&mdash;edit distance calculation  | Yes                     | Yes                     | No                            |
+| N-gram calculation                                 | Yes                     | Yes                     | No                            |
+| Stop word removal                                  | Yes                     | Yes                     | No                            |
 
 ### High-level natural language processing capabilities
 
-|                                             | Azure HDInsight / Azure Databricks | Microsoft Cognitive Services                                |
+|                                             | Azure Databricks / Azure HDInsight | Azure Machine Learning service | Microsoft Cognitive Services                                |
 | ------------------------------------------- | ---------------------------------- | ----------------------------------------------------------- |
-| Entity/intent identification and extraction | No                                 | Yes (Language Understanding Intelligent Service (LUIS) API) |
-| Topic detection                             | Yes (Spark NLP)                    | Yes (Text Analytics API)                                    |
-| Spell checking                              | Yes (Spark NLP)                    | Yes (Bing Spell Check API)                                  |
-| Sentiment analysis                          | Yes (Spark NLP)                    | Yes (Text Analytics API)                                    |
-| Language detection                          | No                                 | Yes (Text Analytics API)                                    |
-| Supports multiple languages besides English | No                                 | Yes (varies by API)                                         |
+| Entity/intent identification and extraction | No                                 | No                                 | Yes (Language Understanding Intelligent Service (LUIS) API) |
+| Topic detection                             | Yes                                | Yes                                | Yes (Text Analytics API)                                    |
+| Spell checking                              | Yes                                | Yes                                | Yes (Bing Spell Check API)                                  |
+| Sentiment analysis                          | Yes                                | Yes                                | Yes (Text Analytics API)                                    |
+| Language detection                          | No                                 | No                                 | Yes (Text Analytics API)                                    |
+| Supports multiple languages besides English | No                                 | No                                 | Yes (varies by API)                                         |
 
 ## See also
 
